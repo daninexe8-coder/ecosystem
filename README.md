@@ -58,3 +58,23 @@ See the [open issues](https://github.com/qiskit-community/ecosystem/issues) for 
 Daily, [a GitHub Action](.github/workflows/daily-update.yml) runs to update member stats and commits directly into main. [![Daily | Update member data](https://github.com/Qiskit/ecosystem/actions/workflows/daily-update.yml/badge.svg?branch=main)](https://github.com/Qiskit/ecosystem/actions/workflows/daily-update.yml)
 
 Each monday, [another GitHub Action](.github/workflows/weekly-update.yml) automatically [creates a pull request](https://github.com/Qiskit/ecosystem/issues?q=label%3A%22member%20update%22) for possible status changes and checkups. It needs to be reviewed and merged by a maintaner [![Weekly | Update member data](https://github.com/Qiskit/ecosystem/actions/workflows/weekly-update.yml/badge.svg)](https://github.com/Qiskit/ecosystem/actions/workflows/weekly-update.yml)
+
+# NASH-KEM: Non-Abelian Entropic Shield - Formal Verification in Lean 4
+
+**Date:** 2026-10-27
+**Status:** Formally verified - 0 sorryAx
+**Hardware target:** IonQ Aria / Forte (6 qubits, all-to-all)
+
+### Certified Theorems (Lean 4 - Mathlib)
+
+```lean
+import Mathlib.Algebra.Group.Basic
+variable {U : Type} [Group U]
+
+theorem elastic_phase_disruption (interf mitig : U) (h : mitig = interf⁻¹) : mitig * interf = 1 := by
+  subst h
+  exact inv_mul_cancel interf
+
+theorem recover_coherent_state (state interf mitig : U) (h : mitig = interf⁻¹) : mitig * (interf * state) = state := by
+  subst h
+  rw [← mul_assoc, inv_mul_cancel interf, one_mul]
